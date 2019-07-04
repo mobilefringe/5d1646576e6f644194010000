@@ -20,8 +20,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div v-else-if="!banner.url">
+                                <div class="banner_image" v-bind:style="{ backgroundImage: 'url(' + banner.image_url + ')' }"></div>
+                            </div>
                             <div v-else>
-                                <a :href="banner.url">
+                                <a :href="banner.url" aria-label="banner.name">
                                     <div class="banner_image" v-bind:style="{ backgroundImage: 'url(' + banner.image_url + ')' }"></div>
                                 </a>
                             </div>
@@ -31,9 +34,9 @@
                 </div>
                 <messages-component></messages-component>
                 <div class="main_container">
-                    <h2 v-if="featuredItems.length > 0" class="home_title center">Events & Promotions</h2>
-                    <div v-if="featuredItems.length > 0" class="row margin_40 home_events">
-                        <div class="col-sm-4" v-for="item in featuredItems">
+                    <h2 class="home_title center" v-if="featuredItems && featuredItems.length > 0">Events & Promotions</h2>
+                    <div class="row margin_40 home_events">
+                        <div class="col-sm-4" v-if="featuredItems" v-for="item in featuredItems">
                     	    <div v-if="item.eventable_type" class="feature_item_container">
                     	        <router-link class="tile" :to="{ name: 'eventDetails', params: { id: item.slug }}">
                         			<img :src="item.image_url" :alt="'Event: ' + item.name">
@@ -64,23 +67,23 @@
                     	    </div>
                         </div>
                     </div>
-                    <!--<h2 v-if="instaFeed" class="home_title center">In Our Feed</h2>-->
-                    <!--<div v-if="instaFeed" class="row hidden-xs margin_60">-->
-                    <!--    <div class="col-md-8 col-md-offset-2">-->
-                    <!--        <div class="insta-feed-container">-->
-                    <!--            <div class="insta-feed-image " v-for="(item, index) in instaFeed">-->
-                    <!--                <a :href="item.link" target="_blank">-->
-                    <!--                    <div class="insta-img" v-bind:style="{ 'background-image': 'url(' + item.images.standard_resolution.url + ')' }"></div>-->
-                    <!--                    <div class="insta_content">-->
-                    <!--                        <p class="insta_caption">{{ item.caption.text }}</p>-->
-                    <!--                        <p class="insta_user">@{{ item.user.username }}</p>-->
-                    <!--                        <i class="insta_icon fab fa-instagram"></i>-->
-                    <!--                    </div>-->
-                    <!--                </a>-->
-                    <!--            </div>-->
-                    <!--        </div>-->
-                    <!--    </div>-->
-                    <!--</div>-->
+                    <h2 v-if="instaFeed.length > 0" class="home_title center">In Our Feed</h2>
+                    <div class="row hidden-xs margin_60">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <div class="insta-feed-container">
+                                <div class="insta-feed-image " v-for="(item, index) in instaFeed">
+                                    <a :href="item.link" target="_blank">
+                                        <div class="insta-img" v-bind:style="{ 'background-image': 'url(' + item.images.standard_resolution.url + ')' }"></div>
+                                        <div class="insta_content">
+                                            <p class="insta_caption">{{ item.caption.text }}</p>
+                                            <p class="insta_user">@{{ item.user.username }}</p>
+                                            <i class="insta_icon fab fa-instagram"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="visible-xs margin_60 insta-feed-container">
                         <div class="insta_prev"></div>
                         <slick ref="slick" :options="instaOptions">
@@ -161,6 +164,7 @@
                 this.loadData().then(response => {
                     var socialFeed = response[3].data;
                     var social_feed = socialFeed.social.instagram;
+                    console.log(socialFeed)
                     this.instaFeed = _.slice(social_feed, [0], [6]);
                     this.instaFeed.map(insta => {
                         if(insta.caption != null){
@@ -181,24 +185,37 @@
                 ]),
                 homeBanners() {
                     var banners = [];
-                    _.forEach(this.$store.state.banners, function (value, key) {
-                        var today = new Date();
-                        var start = new Date (value.start_date);
-                        if (start <= today){
-                            if (value.end_date){
-                                var end = new Date (value.end_date);
-                                if (end >= today){
-                                    banners.push(value);  
-                                }
-                            } else {
-                                banners.push(value);
-                            }
+                    // _.forEach(this.$store.state.banners, function (value, key) {
+                    //     var today = new Date();
+                    //     var start = new Date (value.start_date);
+                    //     if (start <= today){
+                    //         if (value.end_date){
+                    //             var end = new Date (value.end_date);
+                    //             if (end >= today){
+                    //                 banners.push(value);  
+                    //             }
+                    //         } else {
+                    //             banners.push(value);
+                    //         }
                             
-                            if (value.cms_fields.subheader) {
-                                value.heading = value.cms_fields.subheader;
-                            }
-                        }
+                    //         if (value.cms_fields.subheader) {
+                    //             value.heading = value.cms_fields.subheader;
+                    //         }
+                    //     }
+                    // });
+                    var temp_image_url = ["//codecloud.cdn.speedyrails.net/sites/5ca7ab216e6f6418b5120000/image/jpeg/1561048512000/prtc_treat619_1925x470_1.jpg", "//codecloud.cdn.speedyrails.net/sites/5ca7ab216e6f6418b5120000/image/jpeg/1561048496000/prtc_hungry619_1925x470_1.jpg", "//codecloud.cdn.speedyrails.net/sites/5ca7ab216e6f6418b5120000/image/jpeg/1561048932000/prtc_home_1925x470.jpg"]
+                    var temp_name = ["Treat Yourself.","HUNGRY? "]
+                    var temp_desc = ["You deserve it.", "We know just the place..."]
+                    var temp_url = ["/stores", "/dine"]
+                    _.forEach(temp_image_url, function (value, key) {
+                        var temp = {};
+                        temp.image_url = temp_image_url[key];
+                        temp.name = temp_name[key];
+                        temp.description = temp_desc[key];
+                        temp.url = temp_url[key];
+                        banners.push(temp);
                     });
+                    
                     banners = _.orderBy(banners, function(o) { return o.position });
                     return banners
                 },
@@ -210,18 +227,9 @@
                         var today = moment.tz(this.timezone).format();
                         var showOnWebDate = moment.tz(value.show_on_web_date, this.timezone).format();
                         if (today >= showOnWebDate) {
-                            if (_.includes(value.promo_image_url_abs, 'missing')) {
-                                if (value.store != null && value.store != undefined) {
-                                    if (_.includes(value.store.store_front_url_abs, 'missing')) {
-                                        value.image_url = "//codecloud.cdn.speedyrails.net/sites/5b6dcf4e6e6f647b570a0000/image/jpeg/1537463505000/ewp_promo-compressor.jpg";
-                                    } else {
-                                        value.image_url = value.store.store_front_url_abs;
-                                    }
-                                } else {
-                                    value.image_url = "//codecloud.cdn.speedyrails.net/sites/5b6dcf4e6e6f647b570a0000/image/jpeg/1537463505000/ewp_promo-compressor.jpg";
-                                }
+                            if (_.includes(value.image_url, 'missing')) {
+                                value.image_url = "//codecloud.cdn.speedyrails.net/sites/5ca7ab216e6f6418b5120000/image/png/1554995470000/picorivera_default.png";
                             }
-                            
                             // Sort Featured Promotions
                             if (value.is_featured) {
                                 featured_promotions.push(value);
@@ -246,7 +254,7 @@
                         var showOnWebDate = moment.tz(value.show_on_web_date, this.timezone).format();
                         if (today >= showOnWebDate) {
                             if (_.includes(value.image_url, 'missing')) {
-                                value.image_url = "//codecloud.cdn.speedyrails.net/sites/5b6dcf4e6e6f647b570a0000/image/jpeg/1537463477000/ewp-events-compressor.jpg";
+                                value.image_url = "//codecloud.cdn.speedyrails.net/sites/5ca7ab216e6f6418b5120000/image/png/1554995470000/picorivera_default.png";
                             }
                             // Sort Featured Events
                             if (value.is_featured) {
@@ -273,9 +281,12 @@
             methods: {
                 loadData: async function() {
                     try {
-                        let results = await Promise.all([this.$store.dispatch("getData", "banners"), this.$store.dispatch("getData","promotions"), this.$store.dispatch("getData", "events"), this.$store.dispatch('LOAD_PAGE_DATA', {url: "https://eastwashington.mallmaverick.com/api/v4/eastwashington/social.json"})]);
-                        // Add in for Instagram Feed
-                        // this.$store.dispatch('LOAD_PAGE_DATA', {url: "https://eastwashington.mallmaverick.com/api/v4/eastwashington/social.json"})
+                        let results = await Promise.all([
+                            this.$store.dispatch("getData", "banners"), 
+                            this.$store.dispatch("getData","promotions"), 
+                            this.$store.dispatch("getData", "events"), 
+                            this.$store.dispatch('LOAD_PAGE_DATA', { url: "https://pico.mallmaverick.com/api/v4/pico/social.json" })
+                        ]);
                         return results;
                     } catch(e) {
                         console.log("Error loading data: " + e.message);    
