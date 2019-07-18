@@ -14,11 +14,11 @@
                             <breadcrumb></breadcrumb>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div v-if="main" class="margin_60" v-html="main.body"></div>
-                        </div>
-                    </div>
+                    <!--<div class="row">-->
+                    <!--    <div class="col-md-12">-->
+                    <!--        <div v-if="main" class="margin_60" v-html="main.body"></div>-->
+                    <!--    </div>-->
+                    <!--</div>-->
                     <div class="row">
                         <div class="col-md-4">
                             <div v-if="contactInfo" class="margin_60 padding_60" v-html="contactInfo.body"></div>    
