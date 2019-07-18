@@ -141,12 +141,12 @@ require(['Vue', 'vuex', 'vue2-filters', 'vue_router', 'routes', 'vuex-router-syn
                 social_media: [
                     {
                         name: "Facebook",
-                        url: "https://www.facebook.com/EastWashingtonPlace",
+                        url: "https://www.facebook.com/Vista-Village-2060610000907976/ ",
                         iconClass: "fab fa-facebook"
                     },
                     {
                         name: "Instagram",
-                        url: "https://www.instagram.com/eastwashingtonplace/",
+                        url: "https://www.instagram.com/shopvistavillage/",
                         iconClass: "fab fa-instagram"
                     }
                 ],
