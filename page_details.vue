@@ -3,7 +3,7 @@
         <loading-spinner v-if="!dataLoaded"></loading-spinner>
         <transition name="fade">
             <div v-if="dataLoaded" v-cloak>
-                 <div class="inside_page_header" v-if="pageBanner" v-bind:style="{ background: 'linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), #000 url(' + pageBanner.image_url + ') center center' }">
+                 <div class="inside_page_header">
                     <div class="main_container position_relative">
                         <h2 v-html="currentPage.title"></h2>
                     </div>
@@ -33,21 +33,11 @@
             data: function data() {
                 return {
                     dataLoaded: false,
-                    currentPage: null,
-                    pageBanner: null
+                    currentPage: null
                 }
             },
             created() {
                 this.updateCurrentPage(this.id);
-                var temp_repo = this.findRepoByName('Pages Banner');
-                if (temp_repo !== null && temp_repo !== undefined) {
-                   temp_repo = temp_repo.images;
-                   this.pageBanner = temp_repo[0];
-                } else {
-                    this.pageBanner = {
-                        "image_url": "//codecloud.cdn.speedyrails.net/sites/5ca7ab216e6f6418b5120000/image/png/1554995355000/picorivera_banner.png"
-                    }
-                }
             },
             watch: {
                 $route: function () {
@@ -56,8 +46,7 @@
             },
             computed: {
                 ...Vuex.mapGetters([
-                    'property',
-                    'findRepoByName'
+                    'property'
                 ])
             },
             methods: {
@@ -66,9 +55,6 @@
                     var _this = this;
                     this.$store.dispatch('LOAD_PAGE_DATA', { url: this.property.mm_host + "/pages/" + this.id + ".json" }).then(function (response) {
                         _this.currentPage = response.data;
-                        if (_this.currentPage.title = "Thank You") {
-                            _this.currentPage.title = "Newsletter"
-                        }
                         _this.$breadcrumbs[0].meta.breadcrumb = _this.currentPage.title
                         _this.dataLoaded = true;
                     }, function (error) {
