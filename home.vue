@@ -285,7 +285,7 @@
                             this.$store.dispatch("getData", "banners"), 
                             this.$store.dispatch("getData","promotions"), 
                             this.$store.dispatch("getData", "events"), 
-                            this.$store.dispatch('LOAD_PAGE_DATA', { url: "https://pico.mallmaverick.com/api/v4/pico/social.json" })
+                            this.$store.dispatch('LOAD_PAGE_DATA', { url: "http://vistavillage.mallmaverick.com/api/v4/vistavillage/social.json" })
                         ]);
                         return results;
                     } catch(e) {
