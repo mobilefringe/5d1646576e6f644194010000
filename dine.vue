@@ -73,7 +73,7 @@
             									<div class="store_tag_text">Coming Soon</div>
             								</div>
             								<div class="store_tag" v-if="!store.total_published_promos && !store.is_coming_soon_store && store.is_new_store">
-            									<div class="store_tag_text">New Store</div>
+            									<div class="store_tag_text">Now Open</div>
             								</div>
             								<div class="store_details">
             								    <div class="store_text"><h4>{{ store.name }}</h4></div>    
