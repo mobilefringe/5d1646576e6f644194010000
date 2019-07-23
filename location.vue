@@ -106,6 +106,12 @@
                     var src = "https://www.google.com/maps/embed/v1/place?q=" + address + "&key="+ key
                     return src
                 }
+                propertyAddress2() {
+                    var address = this.property.name + "+" + this.property.address1 + "+" + this.property.city + "+" + this.property.province_state + "+" + this.property.country + this.property.postal_code
+                    var key ="AIzaSyCukCjH3fsuDYBdI44hZKL43m60jEToJjY"
+                    var src = "https://www.google.com/maps/embed/v1/place?q=" + address + "&key="+ key
+                    return src
+                }
             }
         });
 	});
