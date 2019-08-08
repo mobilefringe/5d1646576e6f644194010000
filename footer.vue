@@ -24,7 +24,7 @@
                             </a>
                         </span>
                     </div>
-                    <p>{{ getPropertyAddress }}</p>
+                    <p>15 – 40 Main Street and 225 – 401 Vista Village Drive, Vista, CA 92084.</p>
                     <p v-if="property.contact_phone" class="margin_40"><a :href="'tel:' + property.contact_phone">{{ property.contact_phone }}</a></p>
                     <div class="footer_links">
                         <p><a href="/pages/vistavillage-privacy-policy" target="_blank">Privacy Policy</a></p>
