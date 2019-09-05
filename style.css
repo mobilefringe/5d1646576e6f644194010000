@@ -329,7 +329,7 @@ a {
                 line-height: normal;
                 color: #FFF;
                 &:hover, &:active, &:focus, &:visited {
-            	    background: $secondary;
+            	    background: $primary;
             	}
             	a:hover {
                     color: #FFF;
