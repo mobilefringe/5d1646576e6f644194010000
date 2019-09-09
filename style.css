@@ -329,11 +329,13 @@ a {
                 line-height: normal;
                 color: #FFF;
                 &:hover, &:active, &:focus, &:visited {
-            	    background: $primary;
+            	    background: $secondary;
+            	}
+            	p {
+            	    margin: 0;
             	}
             	a:hover {
                     color: #FFF;
-                    text-decoration: underline;
                 }
             }
         }
