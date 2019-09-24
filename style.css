@@ -1338,7 +1338,7 @@ $anim-speed: 0.3s;
         }  
         li > a {
             padding: 8px 10px;
-            width: 167px;
+            width: 100%;
             white-space: normal;
             line-height: normal;
         }
@@ -1562,7 +1562,7 @@ $anim-speed: 0.3s;
         }  
         li > a {
             padding: 8px 10px;
-            width: 208px;
+            width: 100%;
             white-space: normal;
             line-height: normal;
         }
