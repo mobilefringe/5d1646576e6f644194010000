@@ -1262,7 +1262,7 @@ $anim-speed: 0.3s;
         border-radius: 0;
         border-top: 1px solid #555;
         box-shadow: 0 3px 6px 0 rgba(0,0,0,0.15);
-        max-height: 550px;
+        max-height: 560px;
         overflow-y: scroll;
         li {
             padding: 8px 10px;
