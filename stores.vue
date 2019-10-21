@@ -103,5 +103,169 @@
 </template>
 
 <script>
-var _extends=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var i=arguments[t];for(var r in i)Object.prototype.hasOwnProperty.call(i,r)&&(e[r]=i[r])}return e};define(["Vue","vuex","vue-select","vue!search-component","masonry","vue-masonry-plugin"],function(e,t,i,r,s,o){return e.component("v-select",i.VueSelect),e.use(o["default"]),e.component("stores-m-component",{template:template,data:function(){return{dataLoaded:!1,pageBanner:null,windowWidth:0,selectedCat:null,filteredStores:null,search_result:null,query:"",toggleText:"Display as List",logoView:!0,listView:!1,dineFilter:6283}},created:function(){var e=this;this.loadData().then(function(){var t=e.findRepoByName("Directory Banner").images;e.pageBanner=null!=t?t[0]:{image_url:"//codecloud.cdn.speedyrails.net/sites/5b6dcf4e6e6f647b570a0000/image/jpeg/1529532304000/insidebanner2.jpg"},e.dataLoaded=!0,e.query=e.$route.query.category,"dining_full_service"==e.query?(e.selectedCat="Dining Full Service",e.filterByCategory):(e.selectedCat="All",e.filteredStores=e.allStores)})},watch:{$route:function(){this.query=this.$route.query.category,"dining_full_service"==this.query?(this.selectedCat="Dining Full Service",this.filterByCategory):(this.selectedCat="All",this.filteredStores=this.allStores)},selectedCat:function(){this.$nextTick(function(){e.prototype.$redrawVueMasonry()})},windowWidth:function(){this.mobile_store=this.windowWidth<=768?!0:!1}},mounted:function(){this.$nextTick(function(){window.addEventListener("resize",this.getWindowWidth),this.getWindowWidth()})},computed:_extends({},t.mapGetters(["property","timezone","processedStores","processedCategories","storesByAlphaIndex","storesByCategoryName","findCategoryById","findCategoryByName","findRepoByName"]),{allStores:function(){var e=[];return _.forEach(this.processedStores,function(t){t.no_store_logo=_.includes(t.image_url,"missing")?!0:!1,e.push(t)}),this.filteredStores=e,e},dropDownCats:function(){var e=this,t=_.filter(this.processedCategories,function(t){return _.toNumber(t.id)!==e.dineFilter});return t=_.map(t,"name"),t.unshift("All"),t},filterByCategory:function(){if(category_id=this.selectedCat,category_id="All"==category_id||null==category_id||void 0==category_id?"All":this.findCategoryByName(category_id).id,"All"==category_id)this.filteredStores=this.allStores;else{var e=(this.findCategoryById,_.filter(this.allStores,function(e){return _.indexOf(e.categories,_.toNumber(category_id))>-1}));this.filteredStores=e}var t=document.getElementById("selectByCat");t&&t.classList.remove("open")}}),methods:{loadData:function(){var e;return regeneratorRuntime.async(function(t){for(;;)switch(t.prev=t.next){case 0:return t.prev=0,t.next=3,regeneratorRuntime.awrap(Promise.all([this.$store.dispatch("getData","categories"),this.$store.dispatch("getData","repos")]));case 3:e=t.sent,t.next=9;break;case 6:t.prev=6,t.t0=t["catch"](0),console.log("Error loading data: "+t.t0.message);case 9:case"end":return t.stop()}},null,this,[[0,6]])},toggleView:function(){this.logoView?(this.toggleText="Display as Logos",this.listView=!0,this.logoView=!1):this.listView&&(this.toggleText="Display as List",this.logoView=!0,this.listView=!1)},getWindowWidth:function(){this.windowWidth=window.innerWidth},onOptionSelect:function(e){this.search_result="",this.$router.push("/stores/"+e.slug)}},beforeDestroy:function(){window.removeEventListener("resize",this.getWindowWidth)}})});
+// var _extends=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var i=arguments[t];for(var r in i)Object.prototype.hasOwnProperty.call(i,r)&&(e[r]=i[r])}return e};define(["Vue","vuex","vue-select","vue!search-component","masonry","vue-masonry-plugin"],function(e,t,i,r,s,o){return e.component("v-select",i.VueSelect),e.use(o["default"]),e.component("stores-m-component",{template:template,data:function(){return{dataLoaded:!1,pageBanner:null,windowWidth:0,selectedCat:null,filteredStores:null,search_result:null,query:"",toggleText:"Display as List",logoView:!0,listView:!1,dineFilter:6283}},created:function(){var e=this;this.loadData().then(function(){var t=e.findRepoByName("Directory Banner").images;e.pageBanner=null!=t?t[0]:{image_url:"//codecloud.cdn.speedyrails.net/sites/5b6dcf4e6e6f647b570a0000/image/jpeg/1529532304000/insidebanner2.jpg"},e.dataLoaded=!0,e.query=e.$route.query.category,"dining_full_service"==e.query?(e.selectedCat="Dining Full Service",e.filterByCategory):(e.selectedCat="All",e.filteredStores=e.allStores)})},watch:{$route:function(){this.query=this.$route.query.category,"dining_full_service"==this.query?(this.selectedCat="Dining Full Service",this.filterByCategory):(this.selectedCat="All",this.filteredStores=this.allStores)},selectedCat:function(){this.$nextTick(function(){e.prototype.$redrawVueMasonry()})},windowWidth:function(){this.mobile_store=this.windowWidth<=768?!0:!1}},mounted:function(){this.$nextTick(function(){window.addEventListener("resize",this.getWindowWidth),this.getWindowWidth()})},computed:_extends({},t.mapGetters(["property","timezone","processedStores","processedCategories","storesByAlphaIndex","storesByCategoryName","findCategoryById","findCategoryByName","findRepoByName"]),{allStores:function(){var e=[];return _.forEach(this.processedStores,function(t){t.no_store_logo=_.includes(t.image_url,"missing")?!0:!1,e.push(t)}),this.filteredStores=e,e},dropDownCats:function(){var e=this,t=_.filter(this.processedCategories,function(t){return _.toNumber(t.id)!==e.dineFilter});return t=_.map(t,"name"),t.unshift("All"),t},filterByCategory:function(){if(category_id=this.selectedCat,category_id="All"==category_id||null==category_id||void 0==category_id?"All":this.findCategoryByName(category_id).id,"All"==category_id)this.filteredStores=this.allStores;else{var e=(this.findCategoryById,_.filter(this.allStores,function(e){return _.indexOf(e.categories,_.toNumber(category_id))>-1}));this.filteredStores=e}var t=document.getElementById("selectByCat");t&&t.classList.remove("open")}}),methods:{loadData:function(){var e;return regeneratorRuntime.async(function(t){for(;;)switch(t.prev=t.next){case 0:return t.prev=0,t.next=3,regeneratorRuntime.awrap(Promise.all([this.$store.dispatch("getData","categories"),this.$store.dispatch("getData","repos")]));case 3:e=t.sent,t.next=9;break;case 6:t.prev=6,t.t0=t["catch"](0),console.log("Error loading data: "+t.t0.message);case 9:case"end":return t.stop()}},null,this,[[0,6]])},toggleView:function(){this.logoView?(this.toggleText="Display as Logos",this.listView=!0,this.logoView=!1):this.listView&&(this.toggleText="Display as List",this.logoView=!0,this.listView=!1)},getWindowWidth:function(){this.windowWidth=window.innerWidth},onOptionSelect:function(e){this.search_result="",this.$router.push("/stores/"+e.slug)}},beforeDestroy:function(){window.removeEventListener("resize",this.getWindowWidth)}})});
+
+
+    define(["Vue", "vuex", "vue-select", "vue!search-component", "masonry" , "vue-masonry-plugin"], function(Vue, Vuex, VueSelect, SearchComponent, masonry, VueMasonryPlugin) {
+        Vue.component('v-select', VueSelect.VueSelect);
+        Vue.use(VueMasonryPlugin.default);
+        return Vue.component("stores-m-component", {
+            template: template, // the variable template will be injected
+            data: function() {
+                return {
+                    dataLoaded: false,
+                    pageBanner : null,
+                    windowWidth: 0,
+                    selectedCat: null,
+                    filteredStores: null,
+                    search_result : null,
+                    query: "",
+                    toggleText: "Display as List",
+                    logoView: true,
+                    listView: false,
+                    dineFilter: 6118
+                }
+            },
+            created (){
+                this.loadData().then(response => {
+                    var temp_repo = this.findRepoByName('Directory Banner').images;
+                    if(temp_repo != null) {
+                        this.pageBanner = temp_repo[0];
+                    } else {
+                        this.pageBanner = {
+                            "image_url": "//codecloud.cdn.speedyrails.net/sites/5d700e9c6e6f647c7f750000/image/jpeg/1529532304000/insidebanner2.jpg"
+                        }
+                    }
+                    
+                    this.dataLoaded = true;
+                    
+                    this.query = this.$route.query.category
+                    if(this.query == "dining_full_service"){
+                      this.selectedCat = "Dining Full Service";
+                      this.filterByCategory;
+                    } else {
+                        this.selectedCat = "All";
+                        this.filteredStores = this.allStores;
+                    }
+                });
+            },
+            watch: {
+                $route: function() {
+                    this.query = this.$route.query.category
+                    if(this.query == "dining_full_service"){
+                      this.selectedCat = "Dining Full Service";
+                      this.filterByCategory;
+                    } else {
+                        this.selectedCat = "All";
+                        this.filteredStores = this.allStores;
+                    }    
+                },
+                selectedCat: function() {
+                    this.$nextTick(function() {
+                        Vue.prototype.$redrawVueMasonry();
+                    });    
+                },
+                windowWidth: function() {
+                    if (this.windowWidth <= 768) {
+                        this.mobile_store = true;
+                    } else {
+                        this.mobile_store = false;
+                    }
+                }
+            },
+            mounted() {
+                this.$nextTick(function() {
+                    window.addEventListener('resize', this.getWindowWidth);
+                    //Init
+                    this.getWindowWidth();
+                });
+            },
+            computed: {
+                ...Vuex.mapGetters([
+                    'property',
+                    'timezone',
+                    'processedStores',
+                    'processedCategories',
+                    'storesByAlphaIndex',
+                    'storesByCategoryName',
+                    'findCategoryById',
+                    'findCategoryByName',
+                    'findRepoByName'
+                ]),
+                allStores() {
+                    var store_list = [];
+                    var vm = this;
+                    _.forEach(this.processedStores, function(value, key) {
+                        if (_.includes(value.image_url, 'missing')) {
+                            value.no_store_logo = true;
+                        } else {
+                            value.no_store_logo = false;
+                        }
+                        store_list.push(value);
+                    });
+                    this.filteredStores = store_list;
+                    return store_list
+                },
+                dropDownCats() {
+                    var vm = this;
+                    var cats = _.filter(this.processedCategories, function(o) { return _.toNumber(o.id) !== vm.dineFilter && o.store_ids != null});
+                    cats = _.map(cats, 'name');
+                    cats.unshift('All');
+                    return cats;
+                },
+                filterByCategory() {
+                    category_id = this.selectedCat;
+                    if (category_id == "All" || category_id == null || category_id == undefined) {
+                        category_id = "All";
+                    } else {
+                        category_id = this.findCategoryByName(category_id).id;
+                    }
+
+                    if (category_id == "All") {
+                        this.filteredStores = this.allStores;
+                    } else {
+                        var find = this.findCategoryById;
+                        var filtered = _.filter(this.allStores, function(o) {
+                            return _.indexOf(o.categories, _.toNumber(category_id)) > -1;
+                        });
+                        this.filteredStores = filtered;
+                    }
+                    var el = document.getElementById("selectByCat");
+                    if(el) {
+                        el.classList.remove("open");
+                    }
+                }
+            },
+            methods: {
+                loadData: async function() {
+                    try {
+                        let results = await Promise.all([this.$store.dispatch("getData", "categories"), this.$store.dispatch("getData", "repos")]);
+                    } catch (e) {
+                        console.log("Error loading data: " + e.message);
+                    }
+                },
+                toggleView() {
+                    if (this.logoView) {
+                        this.toggleText = "Display as Logos"
+                        this.listView = true;
+                        this.logoView = false;
+                    } else if (this.listView) {
+                        this.toggleText = "Display as List"
+                        this.logoView = true;
+                        this.listView = false;
+                    } 
+                },
+                getWindowWidth(event) {
+                    this.windowWidth = window.innerWidth;
+                },
+                onOptionSelect(option) {
+                    this.search_result = "";
+                    this.$router.push("/stores/" + option.slug);
+                }
+            },
+            beforeDestroy: function() {
+                window.removeEventListener('resize', this.getWindowWidth);
+            }
+        });
+    });
 </script>
