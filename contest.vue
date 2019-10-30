@@ -3,7 +3,7 @@
         <loading-spinner v-if="!dataLoaded"></loading-spinner>
         <transition name="fade">
             <div v-if="dataLoaded" v-cloak>
-                <div class="inside_page_header" v-if="pageBanner" v-bind:style="{ background: 'linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(' + pageBanner.image_url + ') center center #3176b8' }">
+                <div class="inside_page_header" v-if="pageBanner" v-bind:style="{ background: 'linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(' + pageBanner.image_url + ') center center rgba(19, 110, 178)' }">
                     <div class="main_container position_relative">
                         <h2>Contest</h2>
                     </div>
@@ -16,10 +16,10 @@
                     </div>
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <img v-if="currentContest.image_url" class="img_max" :src="currentContest.image_url" :alt="currentContest.name">
+                            <img v-if="currentContest && currentContest.image_url" class="img_max" :src="currentContest.image_url" :alt="currentContest.name">
                         </div>
                     </div> 
-                    <div class="row"> 
+                    <div class="row" v-if="currentContest"> 
                         <div class="col-md-8 col-md-offset-2">
     						<h3 v-if="currentContest.name" class="contest_title">{{currentContest.name}}</h3>
                             <div v-if="currentContest.rich_description" class="contest_desc" v-html="currentContest.rich_description"></div>
@@ -71,7 +71,7 @@
                                         </label>
         						    </div>
         						    <div class="col-xs-12">
-        						        <p>For more details about personal privacy, please read our <a href="" target="_blank">Privacy Policy</a>.</p>
+        						        <p>For more details about personal privacy, please read our <a href="/pages/pleasanthill-privacy-policy" target="_blank">Privacy Policy</a>.</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -112,7 +112,7 @@
                         this.pageBanner = temp_repo[0];
                     } else {
                         this.pageBanner = {
-                            "image_url": "//codecloud.cdn.speedyrails.net/sites/5b6dcf4e6e6f647b570a0000/image/jpeg/1529532304000/insidebanner2.jpg"
+                            "image_url": "//codecloud.cdn.speedyrails.net/sites/5d8b7f8a6e6f647c040d0000/image/jpeg/1529532304000/insidebanner2.jpg"
                         }
                     }
                 }, error => {
@@ -120,7 +120,7 @@
                 }); 
                 
                 this.$store.dispatch("getData", "contests").then(response => {
-                    this.currentContest = this.findContestByShowOnSlug(''); // Add Contest URL
+                    this.currentContest = this.findContestByShowOnSlug('vistavillage-contest'); //Add Contest Show On URL
                     this.dataLoaded = true;
                 }, error => {
                     console.error("Could not retrieve data from server. Please check internet connection and try again.");
