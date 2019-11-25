@@ -331,7 +331,7 @@ a {
                 color: #FFF;
                 &:hover, &:active, &:focus, &:visited {
             	    background: $secondary;
-            	    color: #000;
+            	    color: #000 !important;
             	}
             	p {
             	    margin: 0;
