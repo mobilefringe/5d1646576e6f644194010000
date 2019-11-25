@@ -331,11 +331,14 @@ a {
                 color: #FFF;
                 &:hover, &:active, &:focus, &:visited {
             	    background: $secondary;
-            	    color: #000;
+            	    
             	}
             	p {
             	    margin: 0;
             	    color: #fff;
+            	    &:hover, &:active, &:focus, &:visited {
+            	        color: #000;
+            	    }
             	}
             	a:hover {
                     color: #000;
