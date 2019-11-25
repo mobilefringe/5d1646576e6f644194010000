@@ -335,6 +335,9 @@ a {
             	}
             	p {
             	    margin: 0;
+            	    &:focus {
+            	        color: #fff;
+            	    }
             	}
             	a:hover {
                     color: #000;
