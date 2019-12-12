@@ -2165,12 +2165,6 @@ input[type=search] {
         text-align: center;
     }
     .tile {
-	    img {
-	        filter: blur(1px);
-	    }
-	    .details {
-	        color: #FFF;
-	    }
 		&:before {
 			top: 30%;
 			opacity: 1;
