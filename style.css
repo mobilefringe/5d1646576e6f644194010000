@@ -1458,7 +1458,7 @@ input[type=search] {
     background-color: transparent !important;
     font-size: 1rem;
     line-height: 1rem;
-    color: $primary !important;
+    color: $text !important;
     transition: all 0.3s ease;
     &:hover {
         text-decoration: underline;
