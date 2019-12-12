@@ -176,7 +176,7 @@
                             insta.caption.text = _.truncate(insta.caption.text, { 'length': 60, 'separator': ' ' });
                         }
                     });
-                    
+                    this.meta = this.findMetaDataByPath(this.$route.path);
                     this.dataLoaded = true;  
                 });
             },
@@ -184,6 +184,7 @@
                 ...Vuex.mapGetters([
                     'property',
                     'timezone',
+                    'findMetaDataByPath',
                     'getPropertyHours',
                     'processedPromos',
                     'processedEvents'
