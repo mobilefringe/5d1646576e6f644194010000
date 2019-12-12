@@ -127,7 +127,7 @@
             created (){
                 this.loadData().then(response => {
                     var temp_repo = this.findRepoByName('Directory Banner').images;
-                    if(temp_repo != null) {
+                    if (temp_repo != null) {
                         this.pageBanner = temp_repo[0];
                     } else {
                         this.pageBanner = {
@@ -136,28 +136,9 @@
                     }
                     
                     this.dataLoaded = true;
-                    
-                    this.query = this.$route.query.category
-                    if(this.query == "dining_full_service"){
-                      this.selectedCat = "Dining Full Service";
-                      this.filterByCategory;
-                    } else {
-                        this.selectedCat = "All";
-                        this.filteredStores = this.allStores;
-                    }
                 });
             },
             watch: {
-                $route: function() {
-                    this.query = this.$route.query.category
-                    if(this.query == "dining_full_service"){
-                      this.selectedCat = "Dining Full Service";
-                      this.filterByCategory;
-                    } else {
-                        this.selectedCat = "All";
-                        this.filteredStores = this.allStores;
-                    }    
-                },
                 selectedCat: function() {
                     this.$nextTick(function() {
                         Vue.prototype.$redrawVueMasonry();
@@ -206,7 +187,7 @@
                 },
                 dropDownCats() {
                     var vm = this;
-                    var cats = _.filter(this.processedCategories, function(o) { return _.toNumber(o.id) !== vm.dineFilter && o.store_ids != null});
+                    var cats = _.filter(this.processedCategories, function(o) { return o.store_ids != null});
                     cats = _.map(cats, 'name');
                     cats.unshift('All');
                     return cats;
