@@ -1,5 +1,5 @@
 <template>
-    <div> <!-- without an outer container div this component template will not render -->
+    <div><!-- without an outer container div this component template will not render -->
         <loading-spinner v-if="!dataLoaded"></loading-spinner>
         <transition name="fade">
             <div v-if="dataLoaded" v-cloak>
@@ -14,7 +14,7 @@
                                         <span v-if="banner.heading" class="banner_heading">{{ banner.heading }}</span>
                                         <h1 class="banner_title">{{ banner.name }}</h1>
                                         <p class="banner_text">{{ banner.description }}</p>
-                                        <a :href="banner.url">
+                                        <a :href="banner.url" :aria-label="banner.name">
                                             <span class="banner_btn animated_btn">Find Out More</span>
                                         </a>
                                     </div>
@@ -24,7 +24,7 @@
                                 <div class="banner_image" v-bind:style="{ backgroundImage: 'url(' + banner.image_url + ')' }"></div>
                             </div>
                             <div v-else>
-                                <a :href="banner.url">
+                                <a :href="banner.url" :aria-label="banner.name">
                                     <div class="banner_image" v-bind:style="{ backgroundImage: 'url(' + banner.image_url + ')' }"></div>
                                 </a>
                             </div>
@@ -34,9 +34,9 @@
                 </div>
                 <messages-component></messages-component>
                 <div class="main_container">
-                    <h2 class="home_title center" v-if="featuredItems.length > 0">Events & Promotions</h2>
-                    <div class="row margin_40 home_events" v-if="featuredItems.length > 0">
-                        <div class="col-sm-4"  v-for="item in featuredItems">
+                    <h2 class="home_title center" v-if="featuredItems && featuredItems.length > 0">Events & Promotions</h2>
+                    <div class="row margin_40 home_events">
+                        <div class="col-sm-4" v-if="featuredItems" v-for="item in featuredItems">
                     	    <div v-if="item.eventable_type" class="feature_item_container">
                     	        <router-link class="tile" :to="{ name: 'eventDetails', params: { id: item.slug }}">
                         			<img :src="item.image_url" :alt="'Event: ' + item.name">
@@ -45,7 +45,8 @@
             					            <h3>{{ item.name }}</h3>
         					            </span>
                 					    <span class="info">
-            					            <p><span v-if="isMultiDay(item)">{{ item.start_date | moment("MMMM D", timezone)}} to {{ item.end_date | moment("MMMM D", timezone)}}</span><span v-else>{{ item.start_date | moment("MMMM D", timezone)}}</span></p>
+            					            <p v-if="isMultiDay(item)">{{ item.start_date | moment("MMMM D", timezone)}} to {{ item.end_date | moment("MMMM D", timezone)}}</p>
+            					            <p v-else>{{ item.start_date | moment("MMMM D", timezone)}}</p>
             					            <p>View Event Details <i class="fa fa-angle-double-right" aria-hidden="true"></i></p>
         					            </span>
                     				</div>
@@ -59,7 +60,8 @@
             					            <h3>{{ item.name }}</h3>
         					            </span>
                 					    <span class="info">
-            					            <p><span v-if="isMultiDay(item)">{{ item.start_date | moment("MMMM D", timezone)}} to {{ item.end_date | moment("MMMM D", timezone)}}</span><span v-else>{{ item.start_date | moment("MMMM D", timezone)}}</span></p>
+            					            <p span v-if="isMultiDay(item)">{{ item.start_date | moment("MMMM D", timezone)}} to {{ item.end_date | moment("MMMM D", timezone)}}</p>
+            					            <p v-else>{{ item.start_date | moment("MMMM D", timezone)}}</p>
             					            <p>View Promotion Details <i class="fa fa-angle-double-right" aria-hidden="true"></i></p>
         					            </span>
                     				</div>
@@ -105,6 +107,7 @@
         </transition>
     </div>
 </template>
+
 <script>
     define(["Vue", "vuex", "vue-meta", "vue!vue-slick", "moment", "moment-timezone", "vue-moment", "vue!welcome_msg"], function (Vue, Vuex, Meta, slick, moment, tz, VueMoment, welcomeMessage) {
         return Vue.component("home-component", {
