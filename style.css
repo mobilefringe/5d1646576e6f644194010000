@@ -19,6 +19,7 @@
 /* *** COLOURS *** */
 // $primary: #329c9c;
 $primary: #3176b8;
+$opacity: rgba(64, 73, 150, 0.8);
 $secondary: #f0c11a;
 $text: #000;
 
@@ -529,7 +530,7 @@ a {
         position: absolute;
         top: 0;
         right: 0;
-        background-color: rgba(49, 55, 113, .7);
+        background-color: $opacity;
         .banner_content {
             min-width: 500px;
             position: absolute;
