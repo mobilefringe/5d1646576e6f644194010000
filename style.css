@@ -914,32 +914,27 @@ $anim-speed: 0.3s;
 	overflow: hidden;
 	box-shadow: 0 0 20px 0 rgba(0,0,0,.05);
 	text-align: left;
-	&:before {
-		content: '';
-		background: linear-gradient( to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.9) 100% );
+    .details {
+		padding: 5px 20px;
 		width: 100%;
-		height: 70%;
-		opacity: 0;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
 		position: absolute;
 		top: 100%;
 		left: 0;
+		opacity: 0;
 		z-index: 2;
-		transition-property: top, opacity;
+		background: $secondary;
+        color: #000;
+        transition-property: top, opacity;
 		transition-duration: $anim-speed;
-	}
-    .details {
-		padding: 0 20px 5px 20px;
-// 		color: #FFF;
-		color: $text;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		z-index: 3;
 		span {
 			display: block;
 			opacity: 0;
 			position: relative;
-			top: 100px;
 			transition-property: top, opacity;
 			transition-duration: $anim-speed;
 			transition-delay: 0s;
@@ -954,7 +949,9 @@ $anim-speed: 0.3s;
 		.info {
 			margin-top: 5px;
 			p {
-			    margin-bottom: 5px;
+			    margin-bottom: 8px;
+			    font-weight: bold;
+			    color: #000;
 			}
 			.fa {
 			    font-size: 0.75rem;
@@ -962,20 +959,11 @@ $anim-speed: 0.3s;
 		}
     }
 	&:focus, &:hover {
-	    img {
-	        filter: blur(2px);
-	    }
-	    .details {
-	        color: #FFF;
-	    }
-		&:before, span {
+		.details, span {
 			opacity: 1;
 		}
-		&:before {
-			top: 30%;
-		}
-		span {
-			top: 0;
+		.details {
+			top: 0%;
 		}
 		.title {
 			transition-delay: 0.15s;
