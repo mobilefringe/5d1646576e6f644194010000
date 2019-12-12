@@ -184,6 +184,7 @@
                 ...Vuex.mapGetters([
                     'property',
                     'timezone',
+                    'findMetaDataByPath',
                     'getPropertyHours',
                     'processedPromos',
                     'processedEvents'
