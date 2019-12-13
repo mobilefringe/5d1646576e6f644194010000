@@ -120,7 +120,7 @@
                 }); 
                 
                 this.$store.dispatch("getData", "contests").then(response => {
-                    this.currentContest = this.findContestByShowOnSlug('longbeach-contest');
+                    this.currentContest = this.findContestByShowOnSlug('vistavillage-contest');
                     if (this.currentContest) {
                         this.dataLoaded = true;
                     } else {
