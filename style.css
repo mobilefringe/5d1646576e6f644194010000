@@ -1218,6 +1218,23 @@ $anim-speed: 0.3s;
         }
     }
 }
+.jobs_image {
+    max-width: 100%;
+    position: relative;
+    filter: blur(0px);
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding: 25px;
+}
 /* *** LEASING *** */
 .leasing_btn {
     margin: 30px auto;
