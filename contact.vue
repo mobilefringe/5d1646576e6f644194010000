@@ -3,9 +3,9 @@
         <loading-spinner v-if="!dataLoaded"></loading-spinner>
         <transition name="fade">
             <div v-if="dataLoaded" v-cloak>
-                <div class="inside_page_header" v-if="pageBanner" v-bind:style="{ background: 'linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(' + pageBanner.image_url + ') center center #3176b8' }">
+                <div class="inside_page_header" v-if="pageBanner" v-bind:style="{ backgroundImage: 'url(' + pageBanner.image_url + ')' }">
                     <div class="main_container position_relative">
-                        <h2>Contact Us</h2>
+                        <h1>Contact Us</h1>
                     </div>
                 </div>
                 <div class="main_container">
