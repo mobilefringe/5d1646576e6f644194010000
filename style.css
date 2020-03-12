@@ -343,7 +343,7 @@ a {
                 &:hover, &:active, &:focus, &:visited {
             	    background: $secondary;
             	    a {
-            	        color: #fff !important;
+            	        color: #000 !important;
             	    }
             	}
             	p {
@@ -353,7 +353,7 @@ a {
             	a {
             	    &:hover,
             	    &:focus {
-            	        color: #000;
+            	        color: #fff;
             	    }
                     
                 }
