@@ -353,7 +353,7 @@ a {
             	a {
             	    &:hover,
             	    &:focus {
-            	        color: #fff;
+            	        color: #000;
             	    }
                     
                 }
