@@ -160,7 +160,13 @@
                     map: null,
                     storeEvents: null,
                     storePromotions: null,
-                    storeCoupons: null
+                    storeCoupons: null,
+                    deliveryAvailable: false,
+                    hasDoordash: false,
+                    hasGrubhub: false,
+                    hasPostmates: false,
+                    hasRestaurantDelivery: false,
+                    hasUberEats: false
                 }
             },
             props:['id'],
@@ -205,6 +211,29 @@
                         storeHours.push(hours);
                     });
                     this.storeHours = _.sortBy(storeHours, function(o) { return o.day_of_week });
+                    
+                    // DELIVERY
+                    var delivery_category = 8875;
+                    var categories = this.currentStore.categories;
+                    var subcategories = this.currentStore.subcategories;
+                    if (_.includes(categories, delivery_category) && !_.isEmpty(subcategories)) {
+                        this.deliveryAvailable = true;
+                        if (_.includes(subcategories, 8879)) {
+                            this.hasUberEats = true;
+                        }
+                        if (_.includes(subcategories, 8876)) {
+                            this.hasDoordash = true;
+                        }
+                        if (_.includes(subcategories, 8877)) {
+                            this.hasGrubhub = true;
+                        }
+                        if (_.includes(subcategories, 8878)) {
+                            this.hasPostmates = true;   
+                        }
+                        // if (_.includes(subcategories, 8244)) {
+                        //     this.hasRestaurantDelivery = true;   
+                        // }
+                    }
                 
                     var vm = this;
                     var temp_promo = [];
