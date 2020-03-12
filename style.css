@@ -1907,6 +1907,28 @@ input[type=search] {
     color: $primary;
     text-transform: uppercase;
 }
+
+.store_details_delivery {
+    display: flex;
+    flex-wrap: wrap;
+    .delivery_option {
+        margin-bottom: 20px;
+        width: 33.33%;
+    }
+    div.delivery_option {
+        width: 33.33%;
+        position: relative;
+        span {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+    }
+}
+
 .store_details_btn {
     min-width: 160px;
 }
