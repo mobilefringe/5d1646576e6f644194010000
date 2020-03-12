@@ -342,7 +342,7 @@ a {
                 color: #FFF;
                 &:hover, &:active, &:focus, &:visited {
             	    background: $secondary;
-            	    p {
+            	    a {
             	        color: #000 !important;
             	    }
             	}
