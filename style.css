@@ -1572,7 +1572,7 @@ input[type=search] {
 }
 .store_category {
     margin-right: 30px;
-    width: 208px;
+    max-width: 208px;
     height: 35px;
     position: relative;
     float: right;
